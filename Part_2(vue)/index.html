@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .wrapper {
+      padding: 40px;
+      display: flex;
+      gap: 20px;
+      justify-content: space-around;
+    }
+    img {
+      width: 300px;
+      height: 300px;
+    }
+    button {
+      height: 40px;
+      padding: 10px;
+      background-color: olive;
+      box-shadow: none;
+      border: none;
+      border-radius: 20px;
+      margin-right: 10px;
+      color: #fff;
+    }
+    .box {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .btn-box {
+      text-align: center;
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+    .red {
+      color: green;
+    }
+  </style>
+  <body>
+    <!-- Задание VUE
+    Вы разрабатываете приложение для отображения и сортировки списка товаров. 
+    У вас есть массив объектов products, где каждый объект представляет товар с его названием и ценой. 
+    Вам необходимо отобразить список товаров и предоставить пользователю возможность сортировать товары по цене 
+    (по возрастанию и по убыванию). -->
+    <div id="app">
+      <div class="wrapper">
+        <div v-for="item in products" :key="products.id" class="box">
+          <img :src="item.url" alt="picture" />
+          <h2>name: {{item.name}}</h2>
+          <h3>Цена: <span class="red">{{item.price}}</span></h3>
+          <br />
+          <br />
+        </div>
+      </div>
+      <div class="btn-box">
+        <button @click="sortPriceHigh()">Сортировка по возрастанию цены</button>
+        <button @click="sortPriceLow()">Сортировка по убыванию цены</button>
+      </div>
+      <br />
+      <div class="btn-box">
+        <button @click="sortPriceHigh2()">sort increase</button>
+        <button @click="sortPriceLow2()">sort decrease</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          products: [
+            {
+              name: "Xiaomi",
+              price: 25000,
+              id: 1,
+              url: "https://ae01.alicdn.com/kf/HTB12.9khlDH8KJjSszcq6zDTFXaF/Xiaomi-Redmi-5-Plus-3-32-18-9.jpg",
+            },
+            {
+              name: "Samsung",
+              price: 35000,
+              id: 2,
+              url: "https://avatars.mds.yandex.net/get-mpic/4466428/img_id7536997588281709130.jpeg/orig",
+            },
+            {
+              name: "Iphone",
+              price: 55000,
+              id: 3,
+              url: "https://ae01.alicdn.com/kf/H75417d0717e7473181417ba34a3e668fu.jpg",
+            },
+            {
+              name: "Sony",
+              price: 40000,
+              id: 4,
+              url: "https://static.baza.farpost.ru/v/1507603487893_bulletin",
+            },
+          ],
+        },
+        computed: {
+          sortPriceHigh2() {
+            return this.products.sort((a, b) => (a.price > b.price ? 1 : -1));
+          },
+          sortPriceLow2() {
+            return this.products.sort((a, b) => (a.price < b.price ? 1 : -1));
+          },
+        },
+        methods: {
+          sortPriceHigh() {
+            this.products.sort((a, b) => (a.price > b.price ? 1 : -1));
+          },
+          sortPriceLow() {
+            this.products.sort((a, b) => (a.price < b.price ? 1 : -1));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
